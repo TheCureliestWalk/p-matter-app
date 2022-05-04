@@ -1,45 +1,22 @@
+<svelte:head>
+  <link href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro@4cac1a6/css/all.css" rel="stylesheet" type="text/css" />
+</svelte:head>
+
 <script>
-	import Header from '$lib/header/Header.svelte';
-	import '../app.css';
+  
+import "../app.css";
+  import Sidebar from "../components/sidebar.svelte";
+
 </script>
 
-<Header />
 
-<main>
-	<slot />
-</main>
+<div class="mx-auto">
+  <div class="flex">
 
-<footer>
-	<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
-</footer>
+    <Sidebar/>
+    
 
-<style>
-	main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		padding: 1rem;
-		width: 100%;
-		max-width: 1024px;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
 
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 40px;
-	}
-
-	footer a {
-		font-weight: bold;
-	}
-
-	@media (min-width: 480px) {
-		footer {
-			padding: 40px 0;
-		}
-	}
-</style>
+    <slot></slot>
+</div>
+</div>

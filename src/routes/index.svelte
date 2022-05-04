@@ -1,60 +1,47 @@
-<script context="module">
-	export const prerender = true;
-</script>
-
-<script>
-	import Counter from '$lib/Counter.svelte';
-</script>
-
 <svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+    <title>{title}</title>
+    
 </svelte:head>
 
-<section>
-	<h1>
-		<div class="welcome">
-			<picture>
-				<source srcset="svelte-welcome.webp" type="image/webp" />
-				<img src="svelte-welcome.png" alt="Welcome" />
-			</picture>
-		</div>
+<script>
+import { pics } from './index/index.json';
+import Searchbar from '../components/searchbar.svelte';
 
-		to your new<br />SvelteKit app
-	</h1>
+const title = 'Iho\'s App - Index';
 
-	<h2>
-		try editing <strong>src/routes/index.svelte</strong>
-	</h2>
+const getImgs = async () => {
+    let response = await fetch('https://picsum.photos/v2/list?page=4&limit=100');
+    let imgs = await response.json();
+    return pics;
+}
+const promise = getImgs();
+</script>
 
-	<Counter />
-</section>
 
-<style>
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 1;
-	}
+    
+        
+    <div class="py-3 pb-28">
+        <Searchbar/>
+        <div class="columns-5 gap-3 space-y-3">
+            {#await promise}
+        <p>Loading...</p>
+    {:then pics} 
+    {#each pics as {id, author, download_url, url}, i }
+        <div class="p-2 max-w-sm bg-white rounded-lg hover:border-box hover:border-gray-100 hover:shadow-md dark:bg-gray-800 dark:border-gray-700 break-inside-avoid">
+        
+            <a href="{url}"><img src="{ download_url }" alt="{i}"></a>
+            <span class="my-3">{author}</span>
+        </div>
+    {/each}
 
-	h1 {
-		width: 100%;
-	}
+        {:catch error}
+        
+        <p>Error: {error.message}</p>
+    {/await}
+        </div>
+        
+    </div>
 
-	.welcome {
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
 
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
-	}
-</style>
+
+

@@ -1,0 +1,1 @@
+This is just INDEX blog page.
