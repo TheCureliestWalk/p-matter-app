@@ -42,7 +42,7 @@
     }
 
     const markList = async (list) => {
-        await updateDoc(doc(db, 'todo', list.id), {
+        await updateDoc(doc(db, 'todo', list), {
             isComplete: !list.isComplete,
         });
     }
@@ -59,7 +59,7 @@
 <div class="block mx-auto py-28">
     <form>
         <input class="border-3 shadow-md p-5 text-grey-300 w-full" type="text" placeholder="+add to-do list" bind:value="{newList.task}">
-        <button class="py-2 underline underline-offset-2 hover:text-amber-300" on:click="{() => addList()}">Add</button>
+        <button class="py-2 underline underline-offset-2 hover:text-amber-300" on:click="{() => addList()}">+Add</button>
     </form>
 
     <ul class="block py-3 text-lg">
@@ -72,7 +72,7 @@
             <span class="{list.isComplete ? 'line-through' : '' }">
                 <li class="hover:via-orange-600">{z}. {list.task}</li>
             </span>
-            <button type="submit" class="text-sm underline underline-offset-1 hover:text-amber-300" on:click="{() => markList(list)}">Mark</button>
+            <button type="submit" class="text-sm underline underline-offset-1 hover:text-amber-300" on:click="{() => markList(list.id)}">Mark</button>
             <button type="submit" class="text-sm underline underline-offset-1 hover:text-amber-300" on:click="{() => deleteList(list)}">Delete</button>
         {/each}
 
