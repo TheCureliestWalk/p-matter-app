@@ -7,7 +7,6 @@
     import { initializeApp, getApp, getApps } from 'firebase/app';
     import { getFirestore, collection, getDocs, onSnapshot, doc, updateDoc, setDoc, addDoc, deleteDoc } from 'firebase/firestore';
     import { firebaseConfig } from '$lib/firebaseConfig';
-import AboutUs from './about-us.svelte';
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
@@ -21,9 +20,12 @@ import AboutUs from './about-us.svelte';
         return lists;
     }
     
-    const promise = getLists(db);
+    const promisex = getLists(db);
+
+    console.log(getLists(db)); //for dev only!
 
     let newList = {
+        id: new Date(),
         task: '',
         isComplete: false,
     }
@@ -39,9 +41,9 @@ import AboutUs from './about-us.svelte';
         
     }
 
-    const markList = async (z) => {
-        await updateDoc(doc(db, 'todo', z), {
-            isComplete: !item.isComplete,
+    const markList = async (list) => {
+        await updateDoc(doc(db, 'todo', list.id), {
+            isComplete: !list.isComplete,
         });
     }
 
@@ -62,7 +64,7 @@ import AboutUs from './about-us.svelte';
 
     <ul class="block py-3 text-lg">
 
-        {#await promise}
+        {#await promisex}
             <p>Loading Data...</p>
         {:then lists} 
             
@@ -70,8 +72,8 @@ import AboutUs from './about-us.svelte';
             <span class="{list.isComplete ? 'line-through' : '' }">
                 <li class="hover:via-orange-600">{z}. {list.task}</li>
             </span>
-            <button type="submit" class="text-sm underline underline-offset-1 hover:text-amber-300" on:click="{() => markList(z)}">Mark</button>
-            <button type="submit" class="text-sm underline underline-offset-1 hover:text-amber-300" on:click="{() => deleteList(z)}">Delete</button>
+            <button type="submit" class="text-sm underline underline-offset-1 hover:text-amber-300" on:click="{() => markList(list)}">Mark</button>
+            <button type="submit" class="text-sm underline underline-offset-1 hover:text-amber-300" on:click="{() => deleteList(list)}">Delete</button>
         {/each}
 
         {:catch error}
