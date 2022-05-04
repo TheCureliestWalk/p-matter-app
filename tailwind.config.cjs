@@ -9,8 +9,8 @@ module.exports = {
       xl: '1280px',
     },
     fontFamily: {
-      display: ['Menlo', 'sans-serif'],
-      body: ['Menlo', 'sans-serif'],
+      display: ['Consolas', 'sans-serif'],
+      body: ['Consolas', 'sans-serif'],
     },
     extend: {},
   },
