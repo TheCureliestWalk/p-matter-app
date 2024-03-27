@@ -1,6 +1,14 @@
-# Svelte App
 
-![logo]("/readme/logo.png")
+![logo](https://raw.githubusercontent.com/TheCureliestWalk/p-matter-app/master/readme/logo.png?token=GHSAT0AAAAAACPM3WX7RYSMVHQ6WGCBWNT6ZQD6QPA)
+---
+
+### 📷 Preview Screenshot
+
+![screenshot](https://raw.githubusercontent.com/TheCureliestWalk/p-matter-app/master/readme/main_page.png?token=GHSAT0AAAAAACPM3WX6H7DGSNQF4V42XT6CZQD6SIQ)
+
+✨ A project was created with __Svelte__
+
+---
 
 ## Run a test server
 
